@@ -1,0 +1,42 @@
+// SPDX-FileCopyrightText: 2026 Anton Wiklund and Solid Memo contributors
+//
+// SPDX-License-Identifier: MIT
+
+{
+    $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+    extends: [
+        'config:recommended',
+        // Every action from outside the repository is pinned to a commit,
+        // with its version after it (`@<sha> # vX.Y.Z`): a tag can be
+        // moved to other code, a commit cannot. Renovate updates both.
+        'helpers:pinGitHubActionDigests',
+    ],
+    baseBranchPatterns: [
+        'main',
+    ],
+    // An update is merged through a pull request once CI passes.
+    automerge: true,
+    automergeType: 'pr',
+    // An update is proposed only once its version has been public for 3
+    // days, so that the registry and the package's users have time to
+    // find a bad or malicious version and pull it first. A security
+    // update does not wait.
+    minimumReleaseAge: '3 days',
+    internalChecksFilter: 'strict',
+    vulnerabilityAlerts: {
+        minimumReleaseAge: null,
+    },
+    labels: ['dependencies'],
+    dependencyDashboardLabels: ['dependencies'],
+    semanticCommits: 'enabled',
+    // The versions package.json's overrides force on Marp's dependencies
+    // are updated with Marp's, in one pull request, so that a new Marp
+    // is built and checked with them.
+    packageRules: [
+        {
+            matchManagers: ['npm'],
+            matchDepNames: ['@marp-team/marp-cli', 'katex', '@xmldom/xmldom', 'basic-ftp'],
+            groupName: 'Marp',
+        },
+    ],
+}
