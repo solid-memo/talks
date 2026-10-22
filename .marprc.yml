@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2026 Anton Wiklund and Solid Memo contributors
+#
+# SPDX-License-Identifier: MIT
+
+# Marp's settings for every talk (https://github.com/marp-team/marp-cli#configuration-file).
+# The themes are in themes/, which npm run build gives Marp with their
+# fonts embedded; a talk names one with `theme:` in its front matter.
+options:
+  # HTML in the slides is limited to a few elements and the class
+  # attribute, for the layouts the themes give (columns, a figure beside
+  # text): anything else is shown as text, not run.
+  html:
+    div: [class]
+    span: [class]
+    br: []
