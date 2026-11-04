@@ -1,0 +1,440 @@
+/* SPDX-FileCopyrightText: 2026 Anton Wiklund and Solid Memo contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/*
+ * @theme solid-memo
+ * @auto-scaling true
+ * @size 16:9 1280px 720px
+ *
+ * Solid Memo's look, from the app's Standard light palette
+ * (https://github.com/solid-memo/website/blob/main/packages/ui/src/palettes.css)
+ * and its fonts: Fredoka for text, Bangers for headings, tilted, with a
+ * yellow shadow. Every text pair meets WCAG AA, most AAA: text on the page
+ * 15.2:1, muted text 6.2:1, green text 5.9:1, the page's text on navy
+ * 15.2:1, muted text and list numbers on navy 10.3:1. The yellow, red and blue are never text.
+ *
+ * The fonts are embedded when the talks are built (scripts/build.mjs):
+ * each url("@fontsource…") below becomes the font file itself, so a talk
+ * loads nothing from anywhere else.
+ *
+ * Classes, set on a slide with <!-- _class: name -->:
+ *   lead     the title slide: centered, larger
+ *   divider  a part's first slide: navy, with the promises
+ *   phone    text on the left, a phone's screenshot on the right
+ *   big      one figure, as large as it goes
+ *   quiet    smaller text, for a slide with more to say
+ */
+
+@font-face {
+  font-family: 'Fredoka Variable';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: block;
+  src: url('@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: Bangers;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('@fontsource/bangers/files/bangers-latin-400-normal.woff2') format('woff2');
+}
+
+:root {
+  --bg: #f7f6f1;
+  --surface: #ffffff;
+  --text: #16202a;
+  --text-muted: #545c68;
+  --border: #e4e1d5;
+  --primary: #2c6b3d;
+  --link: #25603a;
+  --navy: #16202a;
+  --on-navy: #f7f6f1;
+  --on-navy-muted: #c9cdd1;
+  --accent-blue: #b1cfe3;
+  --accent-yellow: #e8ab14;
+  --accent-red: #e8432b;
+  --font-body:
+    'Fredoka Variable', ui-rounded, 'Arial Rounded MT Bold', system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-display: Bangers, 'Fredoka Variable', ui-rounded, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+section {
+  width: 1280px;
+  height: 720px;
+  box-sizing: border-box;
+  padding: 56px 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.45;
+  position: relative;
+}
+
+/* The app's four colors, along the bottom, as on its social preview. */
+section::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    var(--accent-red) 0 25%,
+    var(--accent-yellow) 25% 50%,
+    var(--accent-blue) 50% 75%,
+    var(--primary) 75% 100%
+  );
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.45em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--text);
+  text-shadow: 0.06em 0.06em 0 var(--accent-yellow);
+  align-self: flex-start;
+}
+
+h1 {
+  font-size: 2.6em;
+  transform: rotate(-2deg);
+  transform-origin: left center;
+}
+
+h2 {
+  font-size: 1.75em;
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+}
+
+h3 {
+  font-size: 1.15em;
+  text-shadow: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+p,
+ul,
+ol,
+table,
+pre,
+blockquote {
+  margin: 0 0 0.6em;
+}
+
+ul,
+ol {
+  padding-left: 1.2em;
+}
+
+li + li {
+  margin-top: 0.2em;
+}
+
+li::marker {
+  color: var(--primary);
+}
+
+strong {
+  font-weight: 650;
+  color: var(--primary);
+}
+
+em {
+  font-style: normal;
+  font-weight: 550;
+  background: linear-gradient(transparent 62%, rgb(232 171 20 / 45%) 62%);
+}
+
+a {
+  color: var(--link);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.12em;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.05em 0.3em;
+}
+
+pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.7em 0.9em;
+  font-size: 0.68em;
+  line-height: 1.45;
+  overflow: hidden;
+}
+
+pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 1em;
+}
+
+/* Code in a language Marp's highlight.js knows, in the palette's colors.
+ * Turtle has no grammar there, and shows in the text's color. */
+.hljs-comment,
+.hljs-meta {
+  color: var(--text-muted);
+}
+
+.hljs-string {
+  color: var(--primary);
+}
+
+.hljs-keyword,
+.hljs-built_in,
+.hljs-type {
+  color: #8a2a17;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-symbol {
+  color: #1d4f73;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.8em;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.3em 0.8em;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+th {
+  font-weight: 600;
+  border-bottom: 2px solid var(--text);
+}
+
+blockquote {
+  border-left: 6px solid var(--accent-yellow);
+  padding-left: 0.8em;
+  color: var(--text);
+}
+
+img {
+  background: transparent;
+}
+
+header,
+footer {
+  position: absolute;
+  left: 80px;
+  right: 80px;
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+header {
+  top: 24px;
+}
+
+footer {
+  bottom: 26px;
+}
+
+/* The slide's number, bottom right. */
+section::after {
+  padding: 0;
+  line-height: 1;
+  position: absolute;
+  right: 80px;
+  bottom: 26px;
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+/* Two or three columns, from <div class="cols">, each a <div>. */
+.cols {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.cols > div > :first-child {
+  margin-top: 0;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+/* The title slide. */
+section.lead {
+  align-items: center;
+  text-align: center;
+}
+
+section.lead h1 {
+  align-self: center;
+  transform-origin: center;
+  font-size: 2.9em;
+}
+
+section.lead p {
+  font-size: 1.05em;
+}
+
+/* A part's first slide: navy, as the app's masthead. */
+section.divider {
+  background: var(--navy);
+  color: var(--on-navy);
+}
+
+section.divider h1,
+section.divider h2 {
+  color: var(--on-navy);
+}
+
+section.divider strong {
+  color: var(--on-navy);
+  background: linear-gradient(transparent 62%, rgb(44 107 61 / 90%) 62%);
+}
+
+section.divider p,
+section.divider li,
+section.divider footer,
+section.divider::after {
+  color: var(--on-navy-muted);
+}
+
+section.divider li::marker {
+  color: var(--on-navy-muted);
+}
+
+section.divider a {
+  color: var(--on-navy);
+}
+
+/* A few words that carry the talk, larger. */
+section.statement p {
+  font-size: 1.35em;
+  line-height: 1.6;
+}
+
+/* Text on the left, a phone's screenshot (390 × 844, at 2×) on the right. */
+section.phone {
+  display: grid;
+  grid-template-columns: 1fr 248px;
+  grid-auto-rows: min-content;
+  column-gap: 64px;
+  align-content: center;
+}
+
+section.phone > :not(header, footer) {
+  grid-column: 1;
+}
+
+section.phone > p:has(> img) {
+  grid-column: 2;
+  grid-row: 1 / span 20;
+  align-self: center;
+  margin: 0;
+}
+
+section.phone > p:has(> img) img {
+  display: block;
+  width: 236px;
+  height: auto;
+  border-radius: 26px;
+  border: 6px solid var(--navy);
+  box-shadow: 10px 10px 0 var(--accent-blue);
+}
+
+/* Two phones side by side. */
+section.phone.two {
+  grid-template-columns: 1fr 212px 212px;
+  column-gap: 40px;
+}
+
+section.phone.two > p:has(> img) {
+  grid-column: 2 / span 2;
+  display: flex;
+  gap: 40px;
+}
+
+section.phone.two > p:has(> img) img {
+  width: 212px;
+}
+
+/* The call to act: what to do, beside the codes to scan. */
+.cols.join {
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-auto-flow: row;
+  align-items: center;
+}
+
+.cols.join img {
+  display: block;
+  width: 220px;
+  height: auto;
+  margin-bottom: 0.4em;
+}
+
+.cols.join .muted {
+  font-size: 0.7em;
+}
+
+/* One figure, as large as it goes. */
+section.big {
+  align-items: center;
+  text-align: center;
+}
+
+section.big h2 {
+  align-self: center;
+  transform-origin: center;
+}
+
+section.big .figure {
+  font-family: var(--font-display);
+  font-size: 4.4em;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  text-shadow: 0.05em 0.05em 0 var(--accent-yellow);
+  margin: 0.1em 0 0.25em;
+}
+
+section.quiet {
+  font-size: 27px;
+}
+
+/* A picture that fills the slide's width, such as a drawing. */
+section .wide img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

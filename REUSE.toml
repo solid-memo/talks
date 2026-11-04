@@ -1,0 +1,44 @@
+# Who holds the copyright to each file and under which license it may be
+# reused, as the REUSE specification (https://reuse.software/) has it:
+# `npm run lint:reuse` checks that every file says so.
+#
+# A file that can carry a comment says so in its own SPDX header. This file
+# speaks for the rest: what cannot carry a comment (JSON, pictures), the
+# Markdown, kept free of headers so that it reads cleanly, and what tools
+# write (the lock file). Where several annotations match a file, the last
+# one wins.
+version = 1
+SPDX-PackageName = "Solid Memo talks"
+SPDX-PackageDownloadLocation = "https://github.com/solid-memo/talks"
+
+# The repository's own files without a header of their own: MIT, as
+# LICENSE and LICENSES/MIT.txt say.
+[[annotations]]
+path = [
+    "**/*.md",
+    "**/*.json",
+    ".nvmrc",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Anton Wiklund and Solid Memo contributors"
+SPDX-License-Identifier = "MIT"
+
+# A talk, its slides, speaker notes and drawings: CC BY 4.0, so that anyone
+# may give it, translate it or build on it, saying where it came from.
+[[annotations]]
+path = [
+    "*/slides.md",
+    "*/images/*.svg",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Anton Wiklund and Solid Memo contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# The app's screenshots and pictures, copied from the website's
+# apps/web/public/ (https://github.com/solid-memo/website), under its
+# license, MIT.
+[[annotations]]
+path = "*/images/*.png"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Anton Wiklund and Solid Memo contributors"
+SPDX-License-Identifier = "MIT"

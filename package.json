@@ -1,0 +1,27 @@
+{
+  "name": "solid-memo-talks",
+  "private": true,
+  "description": "Talks about Solid Memo, built with Marp",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "npm run check:slides && npm run build",
+    "check:slides": "node scripts/check.mjs",
+    "lint:reuse": "reuse lint",
+    "lint:workflows": "actionlint && zizmor --offline --no-progress .github/"
+  },
+  "devDependencies": {
+    "@fontsource-variable/fredoka": "5.3.0",
+    "@fontsource/bangers": "5.3.0",
+    "@marp-team/marp-cli": "4.5.1"
+  },
+  "overrides": {
+    "katex": "0.19.0",
+    "@xmldom/xmldom": "0.9.12",
+    "basic-ftp": "6.2.3"
+  }
+}
