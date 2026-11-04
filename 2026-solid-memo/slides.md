@@ -26,7 +26,9 @@ The tagline under the title is the app's own: "Spaced-repetition flashcards that
 
 Everything in this talk is open, at github.com/solid-memo/talks: the slides and these notes under CC BY 4.0, the app's screenshots and logo under MIT.
 
-(If you aren't Anton: the first-person story in these notes is the maintainer's. Tell it as his, or in your own words. Check the figures the notes mark before the talk: they were true on October 22, 2026.)
+(If you aren't Anton: the first-person story in these notes is the maintainer's. Tell it as his, or in your own words. Check the figures the notes mark before the talk: they were checked again on November 4, 2026, at version 6.29.18.)
+
+(For an audience that already builds on Solid, give the other talk, "Nine server setups, no server of its own", in 2026-solid-memo-practitioners.)
 -->
 
 ---
@@ -82,7 +84,7 @@ Spaced repetition in one breath: you study flashcards, and each card comes back 
 
 The audience matters. Solid Memo isn't a tool for Solid developers. It's for anyone who wants to remember what they learn. If Solid is going to be a showcase, it has to work for people who've never heard of it.
 
-(The wording here is the app's own: README and the About page.)
+(The wording here is the app's own: "just before you would forget it" is from the README, "a few minutes a day" from the About page, and "a day, then a few days, then weeks" from the user guide.)
 -->
 
 ---
@@ -121,14 +123,14 @@ Part one. To see how an app can have no server, you need to know what a Solid po
 
 ## What a Solid pod is
 
-> Your own online storage, run by a pod provider you choose, or by yourself. Apps that follow the Solid standards keep your data there, and **you decide who may read it.**
+> Your own online storage, run by a Pod provider you choose, or by yourself. Apps that follow the Solid standards keep your data there, and **you decide who may read it.**
 
 Solid is a set of open specifications from the W3C community for storing your data apart from the apps that use it.
 
 <!--
 The definition is from Solid Memo's user guide.
 
-Think of it as a personal data folder on the web that any app following the Solid standards can use, with your permission. You pick where it lives: a provider such as solidcommunity.net or Inrupt's, or your own server.
+Think of it as a personal data folder on the web that any app following the Solid standards can use, with your permission. You pick where it lives: a provider such as solidcommunity.net, solidweb.me or Inrupt's PodSpaces, or your own server. (If someone asks which to pick: Inrupt says PodSpaces is a developer preview, not for personal data.)
 
 Solid is the set of specifications, started by Tim Berners-Lee. You don't need to know them to follow this talk; the next slide shows what matters.
 -->
@@ -146,7 +148,7 @@ Solid is the set of specifications, started by Tim Berners-Lee. You don't need t
 <!--
 The key idea. On the left, apps. On the right, pods. The app is just a web page. It doesn't store your data: it reads and writes your pod directly from your browser.
 
-Logging in: you type your WebID, a web address that names you. The app reads your profile, finds your identity provider, and sends you there to log in, with Solid-OIDC, which is OpenID Connect plus DPoP, which ties each token to a key in your browser. You type your password on your provider's own page. Solid Memo never sees it, and there's no sign-up form.
+Logging in: you type your WebID, a web address that names you, and the app reads your profile, finds your identity provider and sends you there; or you press the button of a suggested provider, and it sends you straight there. Either way you log in with Solid-OIDC, which is OpenID Connect plus DPoP, which ties each token to a key in your browser. You type your password on your provider's own page. Solid Memo never sees it, and there's no sign-up form.
 
 Because the data isn't in the app, another app can read the same pod. And when you stop using the app, your history stays where it is.
 -->
@@ -166,18 +168,19 @@ Because the data isn't in the app, another app can read the same pod. And when y
     solid-memo:frontLabel "Country or territory"@en , "Land eller territorium"@sv ;
     solid-memo:backLabel "Capital"@en , "Huvudstad"@sv ;
     dcterms:created "2026-09-22T10:40:42.499Z"^^xsd:dateTime ;
+    dcterms:subject <http://www.wikidata.org/entity/Q224> ;
     solid-memo:back "Zagreb"@en , "Zagreb"@sv ;
     solid-memo:front "Croatia"@en , "Kroatien"@sv .
 ```
 
-<span class="muted">From the deck Capitals of the world, version 3, at solid-memo.com/decks/</span>
+<span class="muted">From the deck Capitals of the world, version 4, at solid-memo.com/decks/capitals-of-the-world/v4.ttl</span>
 
 <!--
-This is a real card, from the deck Capitals of the world. Shortened only: each pair of languages is on one line, and only the prefixes this card uses are kept.
+This is a real card, from the deck Capitals of the world, version 4. Shortened: the card has every text in six languages, English, Swedish, Korean, German, Spanish and French, and the slide shows two of them per line; it names two Wikidata subjects, and the slide shows Croatia's; only the prefixes this card uses are kept.
 
 The format is Turtle, a plain-text way to write RDF, the W3C's model for linked data, where every statement is a subject, a property and a value.
 
-Three things to notice. First, it's text you can read. Second, every word with a colon is a web address: solid-memo:Card is defined at solid-memo.com/ns/vocab. Third, every value has a language tag, so one card holds every language.
+Three things to notice. First, it's text you can read. Second, every word with a colon is a web address: solid-memo:Card is defined at solid-memo.com/ns/vocab. Third, every value has a language tag, so one card holds every language. And dcterms:subject points at Wikidata's Croatia: the card says what it's about with an address the whole web shares.
 
 This isn't a row in my database. It's a document on the web, and any RDF tool can read it. The vocabulary and the SHACL shapes that describe valid data are published too.
 -->
@@ -298,7 +301,7 @@ Part two: what the app is like for a learner. Screenshots, from phones, since th
 
 Log in later, and move it into your own pod.
 
-![A guest's deck list on a phone: a banner saying the study is kept in this browser only, with buttons to log in and keep it or to discard it, the course Getting started with Solid Memo to continue, then the decks, each with how many cards are left to review and a Study button](images/decks.png)
+![A guest's deck list on a phone: a banner saying the study is kept in this browser only, with buttons to log in and keep it or to discard it, the study's own buttons, a 5-day streak with 25 cards left for today, and the course Getting started with Solid Memo to continue](images/decks.png)
 
 <!--
 The first screen a newcomer sees has a button: Try it without logging in. No account, no pod, nothing to sign.
@@ -338,16 +341,16 @@ Even that choice is linked data in your pod, not a setting on a server.
 
 ## From paintings to Vim to Korean
 
-**110** in the library: 105 decks and 5 courses.
+**115** in the library: 106 decks and 9 courses.
 
 The app speaks **six languages**: English, Swedish, Korean, German, Spanish and French.
 
 ![The deck library on a phone, searched for famous: the decks found, each with its number of cards and a Preview button, one marked Already imported, two checked, and an Import 2 decks button](images/library.png)
 
 <!--
-The library, as of this talk: 110 entries, 105 flashcard decks and 5 courses. Check the number again before you give the talk; it grows.
+The library, as of November 4, 2026: 115 entries, 106 flashcard decks and 9 courses, about 19,000 cards in their newest versions. Check the number again before you give the talk; it grows.
 
-The range is the point. HTTP status codes and Vim commands. The brightest stars and the periodic table. Famous paintings and the Rijksmuseum collection. Everyday Korean phrases, chess openings, organs of the human body, Eurovision winners.
+The range is the point. HTTP status codes and Vim commands. The brightest stars and the periodic table. Famous paintings and the Rijksmuseum collection. Everyday Korean phrases, chess openings, regions of the brain, Eurovision winners.
 
 The app is in six languages (check again before the talk), and every library deck's newest version has its title and description in all six. Arabic decks show their text right to left.
 
@@ -373,7 +376,7 @@ Courses are chapters of short steps: a bit of theory, then multiple-choice quest
 
 The twist: every question becomes a card in your deck, so when you finish the course, you keep studying it.
 
-The five courses now: Getting started with Solid Memo, which every newcomer is offered; Korean at the Table; Solid fundamentals; the Standard for Public Code; and Swedish Driving License B: Theory. Check the list again before the talk; it grows.
+The nine courses now: Getting started with Solid Memo, which every newcomer is offered; Solid fundamentals; Korean at the Table; Reading Hangul; Web accessibility with WCAG 2.2; Open licenses; DCAT and DCAT-AP; the Standard for Public Code; and Swedish Driving License B: Theory. Check the list again before the talk; it grows.
 
 A course isn't a new kind of thing in the pod. It's a library release with an outline.
 -->
@@ -415,7 +418,7 @@ Free for anyone means usable by anyone.
 
 The aim is WCAG 2.2 at level AA. It's an aim, not a claim of conformance: there's been no full audit, and there's no recorded screen-reader pass yet. The docs list the gaps.
 
-What is checked: the user journeys run axe on every screen a step ends on, in light and dark, on desktop and on a phone, and a violation fails the build. The list of allowed exceptions is empty.
+What is checked: every user journey runs axe on every screen a step ends on, in Chromium, and the guest and reload journeys again on a phone. Theme tours check every screen in dark mode too, and the contrast of the other palettes. A violation fails the build, and the list of allowed exceptions is empty.
 
 (Check these figures again before the talk.) There are four palettes, including high contrast at 7:1 and a color-blind friendly one, four text sizes, reduced motion, and every text is marked with its language, so Arabic reads right to left.
 -->
@@ -510,7 +513,7 @@ So even publishing a deck needs no server of mine.
 
 ## Built to outlast its maintainer
 
-- A **DOI** at Zenodo for every release
+- A **DOI** at Zenodo for its releases
 - The source preserved in **Software Heritage**
 - A written plan for the **domain** if the maintainer steps away
 - What other people's data points at, kept online for at least three years after
@@ -518,7 +521,7 @@ So even publishing a deck needs no server of mine.
 <!--
 If you're going to point at a project as a showcase, it should still be there in five years.
 
-Every release gets a DOI at Zenodo, and the source is preserved in Software Heritage.
+Zenodo archives the releases and gives each a DOI, with one DOI that always resolves to the latest. The source is preserved in Software Heritage.
 
 The domain matters more than you'd think: people's pods hold data that points at solid-memo.com/ns and /decks. GOVERNANCE.md says what happens if I step away: the organization and the domain go to an active co-maintainer, or if there's none, the repository is archived and I keep the domain renewed, with the vocabulary and the decks still served, for at least three years.
 -->
@@ -551,7 +554,9 @@ Solid is a standard, and the app is only as good as the servers it meets. So eve
 
 Four more are advisory: CSS 8 alpha, Pivot, which is the server behind solidcommunity.net, Nextcloud with its Solid app, and the JavaScript Solid Server. They get a start-up check on every pull request, and the full suite weekly and whenever a push to main changes the app's code. Their failures are reported, not a gate.
 
-Every server is pinned: the Community Solid Server images by digest, the others built in the repository from a lockfile or a commit, on base images pinned by digest.
+Every server is pinned: the Community Solid Server images by digest, and the ACP setup on the same image; Node Solid Server, Pivot and JSS built in the repository from a lockfile, and Nextcloud's Solid app from a commit, all on base images pinned by digest.
+
+Each advisory server keeps a list of the tests it fails, with the reason for each: JSS 78, Nextcloud 27. Pivot and the CSS 8 alpha pass everything.
 
 Check the number of server setups again before the talk.
 -->
@@ -668,13 +673,11 @@ Try it: scan the first code. Press "Try it without logging in" and you're studyi
 
 Write a deck: take the Getting started course, then open the Studio.
 
-Contribute: issues labeled good first issue, translations, decks, and interop reports from pod servers I don't test yet. Everything is at github.com/solid-memo.
+Contribute: bug reports and ideas, translations, decks, and interop reports from pod servers I don't test yet; there's an issue form for each. Everything is at github.com/solid-memo.
 
 Or build your own app the same way: static files, the user's pod, no server.
 
-(Before the talk, check that the sponsor page answers.)
-
-And the second code: sponsor the domain. 123.75 kronor a year is the one thing that keeps Solid Memo depending on my wallet. Sponsoring it makes the app cost its maintainer nothing.
+And the second code: sponsor the domain. The sponsor page has been live since November 4, 2026, and GOVERNANCE.md says what donations pay for: the domain first, then the maintainer's time, and they buy no say over the roadmap. 123.75 kronor a year is the one thing that keeps Solid Memo depending on my wallet. Sponsoring it makes the app cost its maintainer nothing.
 -->
 
 ---
@@ -695,8 +698,8 @@ Thank you. Questions?
 
 Questions people tend to ask, and short answers:
 - "So there are servers after all?" Yes: GitHub Pages, your pod, your login provider. None of them is mine, and none keeps a copy of your study.
-- "What if my pod provider closes?" Your data is RDF in open formats. Copy it to another pod, and the app works there too.
-- "Offline? Reminders?" No service worker and no push yet: the app works while it's open.
+- "What if my pod provider closes?" Your data is RDF in documented, open formats, with the vocabulary and shapes published. You can copy it to another pod.
+- "Offline? Reminders?" No service worker and no push: the app works while it's open.
 - "Why not just localStorage?" Because then the data is stuck in one browser. Guest mode is exactly that, and it offers to move into a pod.
-- "Bus factor?" One maintainer, no funding. There's a written plan for stepping away, in GOVERNANCE.md.
+- "Bus factor?" One maintainer, and no funding beyond GitHub Sponsors, which opened in November 2026. There's a written plan for stepping away, in GOVERNANCE.md.
 -->
