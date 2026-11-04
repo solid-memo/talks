@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 440" role="img" aria-labelledby="title desc" font-family="'Fredoka Variable', ui-rounded, system-ui, sans-serif">
+  <!-- SPDX-FileCopyrightText: 2026 Anton Wiklund and Solid Memo contributors -->
+  <!-- SPDX-License-Identifier: CC-BY-4.0 -->
+  <title id="title">Apps and data, apart</title>
+  <desc id="desc">On the left, three apps, each just static files in the browser: Solid Memo, another Solid app, and your app. On the right, two pods: one at a provider the learner chose, one on their own server. Every app reads and writes the learner's pod directly, with the learner's permission; the learner logs in at their own identity provider, never at the app.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#16202a"/>
+    </marker>
+  </defs>
+
+  <text x="20" y="34" font-size="22" font-weight="600" fill="#545c68">Apps: static files in your browser</text>
+  <text x="1060" y="34" font-size="22" font-weight="600" fill="#545c68" text-anchor="end">Pods: the data, where you choose</text>
+
+  <g font-size="28" fill="#16202a" text-anchor="middle">
+    <rect x="20" y="64" width="300" height="88" rx="18" fill="#ffffff" stroke="#16202a" stroke-width="3"/>
+    <rect x="20" y="64" width="12" height="88" rx="6" fill="#e8432b"/>
+    <text x="176" y="118">Solid Memo</text>
+
+    <rect x="20" y="178" width="300" height="88" rx="18" fill="#ffffff" stroke="#16202a" stroke-width="3"/>
+    <rect x="20" y="178" width="12" height="88" rx="6" fill="#e8ab14"/>
+    <text x="176" y="232">Another Solid app</text>
+
+    <rect x="20" y="292" width="300" height="88" rx="18" fill="#ffffff" stroke="#16202a" stroke-width="3" stroke-dasharray="10 8"/>
+    <rect x="20" y="292" width="12" height="88" rx="6" fill="#b1cfe3"/>
+    <text x="176" y="346">Your app</text>
+
+    <rect x="740" y="84" width="320" height="120" rx="22" fill="#e6f1e8" stroke="#2c6b3d" stroke-width="3"/>
+    <text x="900" y="136">Your pod</text>
+    <text x="900" y="174" font-size="21" fill="#545c68">at a provider you chose</text>
+
+    <rect x="740" y="248" width="320" height="120" rx="22" fill="#e6f1e8" stroke="#2c6b3d" stroke-width="3"/>
+    <text x="900" y="300">Or your pod</text>
+    <text x="900" y="338" font-size="21" fill="#545c68">on your own server</text>
+  </g>
+
+  <g stroke="#16202a" stroke-width="3" fill="none" marker-end="url(#arrow)" marker-start="url(#arrow)">
+    <path d="M330 108 C 520 108, 560 144, 728 144"/>
+    <path d="M330 222 C 520 222, 560 160, 728 160"/>
+    <path d="M330 336 C 520 336, 560 176, 728 176"/>
+    <path d="M330 120 C 520 160, 560 300, 728 300" stroke-dasharray="8 8"/>
+  </g>
+
+  <text x="530" y="420" font-size="22" fill="#16202a" text-anchor="middle">Each app reads and writes your pod directly, with your permission.</text>
+</svg>

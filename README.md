@@ -11,6 +11,7 @@ The talks are published at <https://solid-memo.github.io/talks/>.
 | Talk | For | Length |
 | --- | --- | --- |
 | [Build the app, let users keep the data](2026-solid-memo/slides.md) | Developers who don't know Solid | 40 minutes |
+| [Nine server setups, no server of its own](2026-solid-memo-practitioners/slides.md) | People who build on Solid: app developers, server implementers, spec authors | 30 minutes, with questions |
 
 ## Give a talk
 
