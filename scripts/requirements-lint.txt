@@ -13,4 +13,4 @@ shellcheck-py==0.11.0.1
 zizmor==1.31.1
 
 # npm run lint:reuse: every file states its copyright and license.
-reuse==6.2.0
+reuse==6.3.0
